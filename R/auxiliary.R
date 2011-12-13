@@ -15,7 +15,7 @@ KKT <- function(y, x, d, beta = NULL) {
         nlam <- as.integer(ncol(beta))
     }
     fit <- .Fortran("KKT", nobs, nvars, as.double(x), ty, tevent, as.double(beta), 
-        nlam, flog = double(nvars * nlam), PACKAGE = "cocktail")
+        nlam, flog = double(nvars * nlam), PACKAGE = "fastcox")
     res <- matrix(fit$flog, nvars, nlam)
     res <- -res
 }
@@ -68,7 +68,7 @@ OBJ <- function(y, x, d, beta = NULL) {
         nlam <- as.integer(ncol(beta))
     }
     fit <- .Fortran("OBJ", nobs, nvars, as.double(x), ty, tevent, as.double(beta), 
-        nlam, loss = double(nlam), PACKAGE = "cocktail")
+        nlam, loss = double(nlam), PACKAGE = "fastcox")
     res <- fit$loss
     res
 }

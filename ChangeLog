@@ -1,7 +1,8 @@
 CHANGELOG - Record of Changes for fastcox
 Please find below the list of the various changes and improvements that were part of each successive update.
 
-
+1.0.1:
+* [fixed] fixed a naming bug.
 
 1.0.0:
 * Initial release.

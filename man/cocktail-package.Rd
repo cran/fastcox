@@ -18,10 +18,12 @@ URL: 		\tab http://code.google.com/p/fastcox/\cr
 \author{Yi Yang and Hui Zou\cr
 Maintainer: Yi Yang  <yiyang@umn.edu>}
 \references{
-Yang, Y. and Zou, H. (2012) 
-\emph{A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions Statistics and Its Interface.}\cr
-\url{http://code.google.com/p/fastcox/}}
 
+Yang, Y. and Zou, H. (2012), 
+"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface.}\cr
+\url{http://code.google.com/p/fastcox/}\cr
+}
+	
 \examples{
 data(FHT)
 m1<-cocktail(x=FHT$x,y=FHT$y,d=FHT$status,alpha=0.5)

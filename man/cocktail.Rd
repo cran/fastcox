@@ -90,11 +90,10 @@ An object with S3 class \code{\link{cocktail}}.
 \author{Yi Yang and Hui Zou\cr
 Maintainer: Yi Yang  <yiyang@umn.edu>}
 \references{
-Yang, Y. and Zou, H. (2012) 
-\emph{A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions Statistics and Its Interface.}\cr
-\url{http://code.google.com/p/fastcox/}}
-
-
+Yang, Y. and Zou, H. (2012), 
+"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface.}\cr
+\url{http://code.google.com/p/fastcox/}\cr
+}
 \seealso{\code{plot.cocktail}}
 \examples{
 data(FHT)
