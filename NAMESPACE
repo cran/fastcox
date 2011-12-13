@@ -2,8 +2,11 @@ useDynLib("fastcox")
 
 import("Matrix")
 
-export(cocktail,predict.cocktail)
+export(cocktail,
+cv.cocktail,
+cv.survpath,
+predict.cocktail)
 S3method("print","cocktail")
-S3method("plot","cocktail")
 S3method("predict","cocktail")
-
+S3method("plot","cv.cocktail")
+S3method("plot","cocktail")

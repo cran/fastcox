@@ -1,6 +1,9 @@
 CHANGELOG - Record of Changes for fastcox
 Please find below the list of the various changes and improvements that were part of each successive update.
 
+1.1.0:
+* [added] cross validation for choosing the optimal regularized parameter lambda.
+
 1.0.1:
 * [fixed] fixed a naming bug.
 
