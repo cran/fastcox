@@ -1,4 +1,4 @@
-cv.cocktail=function(x,y,d,lambda=NULL,...,nfolds=10,foldid){
+cv.cocktail=function(x,y,d,lambda=NULL,nfolds=5,foldid,...){
   if(!is.null(lambda)&&length(lambda)<2)stop("Need more than one value of lambda for cv.cocktail")
   N=nrow(x)
 ###Fit the model once to get dimensions etc of output
@@ -14,7 +14,7 @@ cv.cocktail=function(x,y,d,lambda=NULL,...,nfolds=10,foldid){
     which=foldid==i
     if(is.matrix(y))y_sub=y[!which,]else y_sub=y[!which]
 	if(is.matrix(d))d_sub=d[!which,]else d_sub=d[!which]
-    outlist[[i]]=cocktail(x[!which,,drop=FALSE],y_sub,d_sub,...)
+    outlist[[i]]=cocktail(x[!which,,drop=FALSE],y_sub,d_sub,lambda = lambda,...)
   }
   ###What to do depends on the type.measure and the model fit
   fun=paste("cv",class(cocktail.object)[[2]],sep=".")

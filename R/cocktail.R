@@ -1,7 +1,7 @@
 cocktail <- function(x, y, d, nlambda = 100, lambda.min = ifelse(nobs < 
     nvars, 0.01, 1e-04), lambda = NULL, alpha = 1, pf = rep(1, nvars), exclude, 
     dfmax = nvars + 1, pmax = min(dfmax * 1.2, nvars), standardize = TRUE, eps = 1e-06, 
-    maxit = 10000) {
+    maxit = 3e4) {
     #################################################################################
     #data setup
     this.call <- match.call()

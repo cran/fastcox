@@ -14,7 +14,7 @@ cocktail(x,y,d,
 	pmax=min(dfmax*1.2,nvars),
 	standardize=TRUE,
 	eps=1e-6,
-	maxit=1e4)
+	maxit=3e4)
 }
 \arguments{
 		\item{x}{matrix of predictors, of dimension \eqn{N \times p}{N*p}; each row is an observation vector.}
@@ -64,13 +64,43 @@ cocktail(x,y,d,
 
 \details{
 The algorithm estimates \eqn{\beta} based on observed data, through elastic net penalized log partial likelihood of Cox's model.
-\deqn{\arg\min(loglik(Data,\beta)+\lambda*P(\beta))}
+\deqn{\arg\min(-loglik(Data,\beta)+\lambda*P(\beta))}
 It can compute estimates at a fine grid of values of \eqn{\lambda}{lambda}s in order to pick up a data-driven optimal \eqn{\lambda}{lambda} for fitting a 'best' final model. The penalty is a combination of l1 and l2 penalty:
 \deqn{P(\beta)=(1-\alpha)/2||\beta||_2^2+\alpha||\beta||_1.} 
 \code{alpha=1} is the lasso penalty.
 For computing speed reason, if models are not converging or running slow, consider increasing \code{eps}, decreasing
 \code{nlambda}, or increasing \code{lambda.min} before increasing
 \code{maxit}.
+
+
+
+\strong{FAQ:}
+
+\bold{Question: }\dQuote{\emph{I am not sure how are we optimizing alpha. I can get optimal lambda for each value of alpha. But how do I select optimum alpha?}} 
+
+\bold{Answer: } \code{cv.cocktail} only finds the optimal lambda given alpha fixed. So to
+chose an good alpha you need to fit cv on a grid of alpha, say (0.1,0.3, 0.6, 0.9, 1) and choose the one corresponds to the lowest predicted deviance.
+
+\bold{Question: }\dQuote{\emph{I understand your are referring to minimizing the quantity \code{cv.cocktail\$cvm}, the mean 'cross-validated error' to optimize alpha and lambda as you did in your implementation. However, I don't know what the equation of this error is and this error is not referred to in your paper either. Do you mind explaining what this is?
+}}
+
+\bold{Answer: } We first define the log partial-likelihood for the Cox model. Assume
+\eqn{\hat{\beta}^{[k]}} is the estimate fitted on \eqn{k}-th fold, define the log partial likelihood function as 
+\deqn{
+L(Data,\hat{\beta}[k])=\sum_{s=1}^{S} x_{i_{s}}^{T}\hat{\beta}[k]-\log(\sum_{i\in R_{s}}\exp(x_{i}^{T}\hat{\beta}[k])).
+}
+Then the log partial-likelihood deviance of the \eqn{k}-th fold is defined
+as
+\deqn{
+D[Data,k]=-2(L(Data,\hat{\beta}[k])).
+}
+We now define the measurement we actually use for cross validation:
+it is the difference between the log partial-likelihood deviance evaluated
+on the full dataset and that evaluated on the on the dataset with
+\eqn{k}-th fold excluded. The cross-validated error is defined as
+\deqn{
+CV-ERR[k]=D(Data[full],k)-D(Data[k^{th}\,\,fold\,\,excluded],k).
+}
 
 }
 

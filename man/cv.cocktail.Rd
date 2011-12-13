@@ -5,7 +5,7 @@
 \description{Does k-fold cross-validation for cocktail, produces a plot,
 and returns a value for \code{lambda}. This function is modified based on the \code{cv} function from the \code{glmnet} package.}
 \usage{
-cv.cocktail(x,y,d,lambda=NULL,...,nfolds=10,foldid)
+cv.cocktail(x,y,d,lambda=NULL,nfolds=5,foldid,...)
 }
 \arguments{
 \item{x}{matrix of predictors, of dimension \eqn{N \times p}{N*p}; each row is an observation vector.}

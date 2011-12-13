@@ -19,12 +19,14 @@ cv.survpath=function(outlist,lambda,x,y,d,foldid){
     coefmat=predict(fitobj,type="coeff")
     plfull=survpath.deviance(x=x,y=y,d=d,beta=coefmat)
     plminusk=survpath.deviance(x=x[!which,],y=y[!which],d=d[!which],beta=coefmat)
-    cvraw[i,seq(along=plfull)]=plfull-plminusk
+	cvraw[i,seq(along=plfull)]=plfull-plminusk
   }
   N=nfolds - apply(is.na(cvraw),2,sum)
-  cvm=apply(cvraw,2,mean,na.rm=TRUE)
-  cvsd=sqrt(apply(scale(cvraw,cvm,FALSE)^2,2,mean,na.rm=TRUE)/(N-1))
-  list(cvm=cvm,cvsd=cvsd,name="Partial-Likelihood")
+  weights=as.vector(tapply(d,foldid,sum))
+  cvraw=cvraw/weights
+  cvm=apply(cvraw,2,weighted.mean,w=weights,na.rm=TRUE)
+  cvsd=sqrt(apply(scale(cvraw,cvm,FALSE)^2,2,weighted.mean,w=weights,na.rm=TRUE)/(N-1))
+  list(cvm=cvm,cvsd=cvsd,name="Partial-Likelihood Deviance")
 }
 
 
@@ -46,5 +48,5 @@ survpath.deviance=function(x,y,d,beta=NULL){
   }
   fit=.Fortran("OBJ",nobs,nvars,x,y,d,beta,nvec,flog=double(nvec),
     PACKAGE="fastcox")
-2*fit$flog*50
+2*fit$flog*nobs
 }
