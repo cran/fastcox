@@ -15,15 +15,15 @@
       double precision :: yk                        
       double precision :: y(no)                          
       double precision :: d(no)                                        
-15210 do 15211 j=1,no                                                 
+      do 15211 j=1,no                                                 
       idx(j)=j                                                         
 15211 continue                                                        
-15212 continue
+      continue
 !     sort vector y and store the order in idx                                                        
       call quicksort(y,idx,1,no)        
 !     CHECK if all d==0; j is the first index where d = 1
       j=1                                                             
-15250 continue                                                        
+      continue                                                        
 15251 if(d(idx(j))>0.0)goto 15252                                   
       j=j+1                                                           
       if(j > no)goto 15252                                           
@@ -35,18 +35,18 @@
 15271 continue                                                        
       j0=j-1       ! # of d == 0 before d[j]                                                 
       nidx=no-j0                                                        
-15280 do 15281 j=1,nidx                                                 
+      do 15281 j=1,nidx                                                 
       idx(j)=idx(j+j0)   ! exclude first j - 1 elements (whose d == 1 ) from the vector.                                                 
 15281 continue                                                        
-15282 continue
+      continue
       jerr=0                                                          
       n_s=0        ! initailize n_s                                                    
       t0=y(idx(1))                                                     
       yk=t0                                                           
       j=2                                                             
-15290 continue                                                     
+      continue                                                     
 15291 continue                                                        
-15300 continue
+      continue
 15301 if(d(idx(j))>0.0.and.y(idx(j))>yk)goto 15302                
       j=j+1                      ! find the index j uch that d[2]>0 and y[2] > y[1] (no tie)                                         
       if(j>nidx)goto 15302                                           

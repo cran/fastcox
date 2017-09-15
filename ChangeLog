@@ -1,14 +1,20 @@
 CHANGELOG - Record of Changes for fastcox
 Please find below the list of the various changes and improvements that were part of each successive update.
 
+1.1.3:
+* [fixed] Fixed some variable type issues in the Fortran code.
+
+1.1.2:
+* [fixed] Fixed a bug in the function predict.cocktail.
+
 1.1.1:
-* [fixed, Added] fixed a bug in the function cv.cocktail. Added a FAQ section in the manual.
+* [fixed, Added] Fixed a bug in the function cv.cocktail. Added a FAQ section in the manual.
 
 1.1.0:
-* [added] cross validation for choosing the optimal regularized parameter lambda.
+* [added] Cross validation for choosing the optimal regularized parameter lambda.
 
 1.0.1:
-* [fixed] fixed a naming bug.
+* [fixed] Fixed a naming bug.
 
 1.0.0:
 * Initial release.

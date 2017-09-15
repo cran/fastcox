@@ -67,14 +67,13 @@
 ! LICENSE: GNU GPL (version 2)
 ! 
 ! AUTHORS:
-!    Yi Yang (yiyang@umn.edu) and Hui Zou (hzou@stat.umn.edu), 
+!    Yi Yang (yi.yang6@mcgill.ca) and Hui Zou (hzou@stat.umn.edu), 
 !    School of Statistics, University of Minnesota.
 ! 
 ! REFERENCES:
 !    Yang, Y. and Zou, H. (2012). A Cocktail Algorithm for Solving 
 !    The Elastic Net Penalized Cox's Regression in High Dimensions
-!    Statistics and Its Interface. To be accepted after minor 
-!    revision. 
+!    Statistics and Its Interface. 6:2, 167-173. 
 
 
 ! --------------------------------------------------
@@ -108,7 +107,6 @@ SUBROUTINE coxlassoNET(rs,nrs,alpha,nobs,nvars,x,jd,pf,dfmax,pmax,nlam,flmin,ula
     INTEGER :: j
     INTEGER :: l
     INTEGER :: nk
-    INTEGER :: ierr
     INTEGER :: nrs
     INTEGER :: rs(nrs)
     INTEGER, DIMENSION (:), ALLOCATABLE :: ju
@@ -116,9 +114,7 @@ SUBROUTINE coxlassoNET(rs,nrs,alpha,nobs,nvars,x,jd,pf,dfmax,pmax,nlam,flmin,ula
     DOUBLE PRECISION ::xnorm(nvars)
 ! - - - begin - - -    
 ! - - - allocate variables - - -      
-    ALLOCATE(ju(1:nvars),STAT=ierr)                        
-    jerr=jerr+ierr                                                                 
-    IF(jerr/=0) RETURN     
+    ALLOCATE(ju(1:nvars))                        
     xnorm=0.0
     xmean=0.0
     CALL chkvars(nobs,nvars,x,ju)       
@@ -131,7 +127,7 @@ SUBROUTINE coxlassoNET(rs,nrs,alpha,nobs,nvars,x,jd,pf,dfmax,pmax,nlam,flmin,ula
         jerr=10000
         RETURN
     ENDIF
-    pf=max(0.0,pf)                                  
+    pf=max(0.0D0,pf)                                  
     pf=pf*nvars/sum(pf)
     CALL standardcox(nobs,nvars,x,ju,isd,xmean,xnorm) 
     CALL coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin,ulam,&
@@ -207,7 +203,6 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
     INTEGER :: j
     INTEGER :: l
     INTEGER :: ix
-    INTEGER :: ctr
     INTEGER :: ni
     INTEGER :: me
     INTEGER :: mm(nvars)
@@ -217,7 +212,7 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
 ! - - - some initial setup - - -
     ixx=0      
     oma=1.0-alpha
-    one=0.0
+    one=0
     b=0.0                                   
     oldbeta=0.0
     m=0                                       
@@ -227,6 +222,8 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
     mnl=min(mnlam,nlam)   
     xb = 1.0     
     maj = 0.0
+    al = 0.0D0
+    alf = 0.0D0
     DO j = 1,nvars
         DO s = 1, nrs
             maj(j) = maj(j) + (maxval(x(rs(s):nobs,j))-minval(x(rs(s):nobs,j)))**2
@@ -261,11 +258,11 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
         ENDIF
         sa=alpha*al
         sb=oma*al
-		tlam=alpha*(2.0*al-al0)                                    
+        tlam=alpha*(2.0*al-al0)                                    
         do k=1,nvars
-	        if(ixx(k) == 1) cycle
-	        if(ju(k) == 0) cycle
-	        if(ga(k) > tlam*pf(k)) ixx(k)=1
+            if(ixx(k) == 1) cycle
+            if(ju(k) == 0) cycle
+            if(ga(k) > tlam*pf(k)) ixx(k)=1
         enddo
         ! --------- outer loop ----------------------------                                                              
         DO  
@@ -275,13 +272,13 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
                 npass=npass+1              
                 dif=0.0      
                 DO k=1,nvars
-				    if(ixx(k) == 0) cycle                                                                                  
+                    if(ixx(k) == 0) cycle                                                                                  
                     oldb=b(k)     
-                    call  risk(nobs,nvars,rs,nrs,x(:,k),xb,fj)       
+                    call  risk(nobs,rs,nrs,x(:,k),xb,fj)       
                     u = maj(k)*b(k)+fj
                     v = pf(k)*sa   
-	                if(abs(u) <= v) then
-		                b(k) = 0                              
+                    if(abs(u) <= v) then
+                        b(k) = 0                              
                     else
                         b(k) = sign(abs(u) - v,u)/(maj(k)+pf(k)*sb)                                     
                     endif
@@ -299,10 +296,10 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
                 ENDDO  
                 IF(ni>pmax) EXIT                              
                 IF(dif<eps) EXIT
-				if(npass > maxit) then                               
-		      		jerr=-l                                                  
-		      		return
-		        endif    
+                if(npass > maxit) then                               
+                      jerr=-l                                                  
+                      return
+                endif    
         ! --inner loop----------------------                                      
                 DO                    
                     npass=npass+1
@@ -310,11 +307,11 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
                     DO j=1,ni                                
                         k=m(j)                                    
                         oldb=b(k)
-                        call  risk(nobs,nvars,rs,nrs,x(:,k),xb,fj)                                 
+                        call  risk(nobs,rs,nrs,x(:,k),xb,fj)                                 
                         u = maj(k)*b(k)+fj
                         v = pf(k)*sa   
-					    if(abs(u) <= v) then
-						    b(k) = 0                              
+                        if(abs(u) <= v) then
+                            b(k) = 0                              
                         else
                             b(k) = sign(abs(u) - v,u)/(maj(k)+pf(k)*sb)                                     
                         endif         
@@ -325,10 +322,10 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
                         ENDIF                         
                     ENDDO                  
                     IF(dif<eps) EXIT 
-					  if(npass > maxit) then                               
-			      		  jerr=-l                                                  
-			      		  return
-			          endif  
+                      if(npass > maxit) then                               
+                            jerr=-l                                                  
+                            return
+                      endif  
                 ENDDO
             ENDDO                                 
             IF(ni>pmax) EXIT  
@@ -341,14 +338,14 @@ SUBROUTINE coxlassoNETpath(rs,nrs,alpha,nobs,nvars,x,ju,pf,dfmax,pmax,nlam,flmin
             ENDDO        
             IF(ix/=0) cycle     ! change this line when strong rule is added
             call drv(nobs,nvars,rs,nrs,x,xb,vl)
-			do k=1,nvars                                            
-	            if(ixx(k)==1)cycle                                  
-	            if(ju(k)==0)cycle                                   
-	            ga(k)=abs(vl(k))
-	            if(ga(k) > sa*pf(k))then                          
-	      	        ixx(k)=1                                                   
-		            ix=1                                                       
-	            endif                                                   
+            do k=1,nvars                                            
+                if(ixx(k)==1)cycle                                  
+                if(ju(k)==0)cycle                                   
+                ga(k)=abs(vl(k))
+                if(ga(k) > sa*pf(k))then                          
+                      ixx(k)=1                                                   
+                    ix=1                                                       
+                endif                                                   
             enddo 
             if(ix == 1) cycle
             exit

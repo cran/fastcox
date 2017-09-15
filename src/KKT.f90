@@ -10,7 +10,6 @@
       double precision :: a(ni,nlam)
       double precision :: flog(ni,nlam)
 !     working variable
-      integer :: i
       integer :: j
       integer :: n_s
       integer :: lam

@@ -32,11 +32,11 @@ Similar to other predict methods, this functions predicts fitted values, link fu
 
 
 \author{Yi Yang and Hui Zou\cr
-Maintainer: Yi Yang  <yiyang@umn.edu>}
+Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 \references{
-Yang, Y. and Zou, H. (2012), 
-"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface.}\cr
-\url{http://code.google.com/p/fastcox/}\cr
+Yang, Y. and Zou, H. (2013), 
+"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
+\url{https://github.com/emeryyi/fastcox}\cr
 
 Friedman, J., Hastie, T. and Tibshirani, R. (2008)
   "Regularization Paths for Generalized Linear Models via Coordinate
@@ -56,9 +56,7 @@ Friedman, J., Hastie, T. and Tibshirani, R. (2008)
 data(FHT)
 m1<-cocktail(x=FHT$x,y=FHT$y,d=FHT$status,alpha=0.5)
 predict(m1,type="nonzero")
-predict(m1,s=c(0.01,0.005),type="coefficients")
 predict(m1,newx=FHT$x[1:5,],type="response")
-predict(m1,newx=FHT$x[1:3,],s=0.01,type="link")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

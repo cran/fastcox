@@ -19,12 +19,12 @@ The call that produced the \code{\link{cocktail}} object is printed, followed by
 a two-column matrix, the first columns is the number of nonzero coefficients and the second column is \code{Lambda}.}
 
 \author{Yi Yang and Hui Zou\cr
-Maintainer: Yi Yang  <yiyang@umn.edu>}
+Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 
 \references{
-Yang, Y. and Zou, H. (2012), 
-"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface.}\cr
-\url{http://code.google.com/p/fastcox/}\cr
+Yang, Y. and Zou, H. (2013), 
+"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
+\url{https://github.com/emeryyi/fastcox}\cr
 
 Friedman, J., Hastie, T. and Tibshirani, R. (2008)
   "Regularization Paths for Generalized Linear Models via Coordinate

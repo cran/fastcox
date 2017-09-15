@@ -11,23 +11,22 @@ Version: 	\tab 1.0.0\cr
 Date: 		\tab 2012-03-26\cr
 Depends: 	\tab Matrix\cr
 License: 	\tab GPL (version 2)\cr
-URL: 		\tab http://code.google.com/p/fastcox/\cr
+URL: 		\tab https://github.com/emeryyi/fastcox\cr
 }
 }
 
 \author{Yi Yang and Hui Zou\cr
-Maintainer: Yi Yang  <yiyang@umn.edu>}
+Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 \references{
 
-Yang, Y. and Zou, H. (2012), 
-"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface.}\cr
-\url{http://code.google.com/p/fastcox/}\cr
+Yang, Y. and Zou, H. (2013), 
+"A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
+\url{https://github.com/emeryyi/fastcox}\cr
 }
 	
 \examples{
 data(FHT)
 m1<-cocktail(x=FHT$x,y=FHT$y,d=FHT$status,alpha=0.5)
-predict(m1,newx=FHT$x[1:5,],s=c(0.01,0.005))
 predict(m1,type="nonzero")
 plot(m1)
 }

@@ -10,7 +10,6 @@
       double precision :: a(ni,nlam)
       double precision :: loss(nlam)
 !     working variable
-      integer :: i
       integer :: j
       integer :: n_s
       integer :: lam
@@ -36,7 +35,7 @@
       f=matmul(x,a)
       e=exp(sign(min(abs(f),fmax),f))                    
       do lam=1,nlam
-          call objective(no,ni,n_s,i_s,idx,x,f(:,lam),e(:,lam),irs,r)
+          call objective(no,n_s,i_s,idx,f(:,lam),e(:,lam),irs,r)
           loss(lam) = r                                                         
       enddo
       return

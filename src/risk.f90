@@ -2,10 +2,9 @@
 ! sum L' 
 ! output: L'
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine risk(nobs,nvars,rs,nrs,x,xb,fjj)
+      subroutine risk(nobs,rs,nrs,x,xb,fjj)
       IMPLICIT NONE
       integer :: nobs
-      integer :: nvars
       INTEGER::nrs
       INTEGER::rs(nrs)
       integer :: j
@@ -18,8 +17,8 @@
       double precision :: se                                           
       double precision :: sxe
       fjj=0.0
-	  se = 0.0
-	  sxe = 0.0                                            
+      se = 0.0
+      sxe = 0.0                                            
       do k=nrs,1,-1                                              
           j2=nobs
           if(k<nrs)j2=rs(k+1)-1                                                             
