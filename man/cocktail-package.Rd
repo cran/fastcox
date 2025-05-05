@@ -11,7 +11,7 @@ Version: 	\tab 1.0.0\cr
 Date: 		\tab 2012-03-26\cr
 Depends: 	\tab Matrix\cr
 License: 	\tab GPL (version 2)\cr
-URL: 		\tab https://github.com/emeryyi/fastcox\cr
+URL: 		\tab https://github.com/archer-yang-lab/fastcox\cr
 }
 }
 
@@ -21,7 +21,7 @@ Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 
 Yang, Y. and Zou, H. (2013), 
 "A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
-\url{https://github.com/emeryyi/fastcox}\cr
+\url{https://github.com/archer-yang-lab/fastcox}\cr
 }
 	
 \examples{

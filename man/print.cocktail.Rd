@@ -24,18 +24,18 @@ Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 \references{
 Yang, Y. and Zou, H. (2013), 
 "A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
-\url{https://github.com/emeryyi/fastcox}\cr
+\url{https://github.com/archer-yang-lab/fastcox}\cr
 
 Friedman, J., Hastie, T. and Tibshirani, R. (2008)
   "Regularization Paths for Generalized Linear Models via Coordinate
-    Descent",   \url{http://www.stanford.edu/~hastie/Papers/glmnet.pdf}\cr
+    Descent",   \url{https://web.stanford.edu/~hastie/Papers/glmnet.pdf}\cr
   \emph{Journal of Statistical Software}, Vol. 33(1), 1-22 Feb 2010\cr
-  \url{http://www.jstatsoft.org/v33/i01/}\cr\cr
+  \url{https://www.jstatsoft.org/v33/i01/}\cr\cr
   Simon, N., Friedman, J., Hastie, T., Tibshirani, R. (2011)
   "Regularization Paths for Cox's Proportional Hazards Model via
     Coordinate Descent", \emph{Journal of Statistical Software}, Vol. 39(5)
     1-13 \cr
-  \url{http://www.jstatsoft.org/v39/i05/}
+  \url{https://www.jstatsoft.org/v39/i05/}
 }
 
 \examples{

@@ -1,15 +1,22 @@
 Package: fastcox
 Title: Lasso and Elastic-Net Penalized Cox's Regression in High
         Dimensions Models using the Cocktail Algorithm
-Version: 1.1.3
-Date: 2017-09-12
-Author: Yi Yang <yi.yang6@mcgill.ca>, Hui Zou <hzou@stat.umn.edu>
+Version: 1.1.4
+Date: 2025-04-29
+Authors@R: c(
+  person("Yi", "Yang", email = "yi.yang6@mcgill.ca",
+  role = c("aut", "cre"), comment = "http://www.math.mcgill.ca/yyang/"),
+  person("Hui", "Zou", email = "hzou@stat.umn.edu",
+  role = c("aut"), comment = "http://users.stat.umn.edu/~zouxx019/")
+  )
+Author: Yi Yang [aut, cre] (http://www.math.mcgill.ca/yyang/),
+  Hui Zou [aut] (http://users.stat.umn.edu/~zouxx019/)
 Maintainer: Yi Yang <yi.yang6@mcgill.ca>
 Imports: Matrix, methods
-Description: We implement a cocktail algorithm, a good mixture of coordinate decent, the majorization-minimization principle and the strong rule, for computing the solution paths of the elastic net penalized Cox's proportional hazards model. The package is an implementation of Yang, Y. and Zou, H. (2013) DOI: <doi:10.4310/SII.2013.v6.n2.a1>.
+Description: We implement a cocktail algorithm, a good mixture of coordinate decent, the majorization-minimization principle and the strong rule, for computing the solution paths of the elastic net penalized Cox's proportional hazards model. The package is an implementation of Yang, Y. and Zou, H. (2013) <doi:10.4310/SII.2013.v6.n2.a1>.
 License: GPL-2
-URL: https://github.com/emeryyi/fastcox
-Packaged: 2017-09-15 01:58:31 UTC; yiyang
+URL: https://github.com/archer-yang-lab/fastcox
+Packaged: 2025-05-05 23:20:53 UTC; jiaozi
 Repository: CRAN
-Date/Publication: 2017-09-15 07:43:20 UTC
+Date/Publication: 2025-05-05 23:50:02 UTC
 NeedsCompilation: yes

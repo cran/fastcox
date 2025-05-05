@@ -122,7 +122,7 @@ Maintainer: Yi Yang  <yi.yang6@mcgill.ca>}
 \references{
 Yang, Y. and Zou, H. (2013), 
 "A Cocktail Algorithm for Solving The Elastic Net Penalized Cox's Regression in High Dimensions", \emph{Statistics and Its Interface,} 6:2, 167-173.\cr
-\url{https://github.com/emeryyi/fastcox}\cr
+\url{https://github.com/archer-yang-lab/fastcox}\cr
 }
 \seealso{\code{plot.cocktail}}
 \examples{
